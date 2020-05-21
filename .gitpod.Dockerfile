@@ -10,9 +10,9 @@ RUN sudo apt-get update \
 RUN sudo mkdir -p /data/db \
  && sudo chown gitpod:gitpod -R /data/db
  
-FROM gitpod/workspace-mysql
+#FROM gitpod/workspace-mysql
                     
-USER gitpod
+#USER gitpod
 
 # Setup Heroku CLI
 #RUN curl https://cli-assets.heroku.com/install.sh | sh

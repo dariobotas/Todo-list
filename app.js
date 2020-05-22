@@ -1,16 +1,93 @@
 const express = require("express");
 const path = require('path');
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
+mongoose.connect("mongodb://localhost/data",{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+let db = mongoose.connection;
+
+//Check connection
+db.once('open', function(){
+    console.log('Ligado ao MongoDB');
+});
+
+// Check for DB errors
+db.on('error', function(err){
+    console.log(err);
+});
 
 //Init app
 const app = express();
+
+// Bring in Models
+let Tarefa = require('./models/tarefa');
+let Estado = require('./models/estados');
+let Importancia = require('./models/importancia');
+let Urgencia = require('./models/urgencia');
+let Prioridade = require('./models/prioridade');
 
 // Load View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// Body parser middleware
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 //Home Route
 app.get('/', function(request, response){
-    let Estados = {
+    Tarefa.find({}, function(err, tarefas){
+        if(err){
+            console.log(err);
+        }else{
+            response.render('index',{
+            titulo: 'Lista de tarefas',
+            tarefas: tarefas
+        });
+        }
+    });
+});
+
+// Add Route
+app.get('/tarefas/add', function(req, res){
+    res.render('add_todo',{
+        titulo:'Adicionar tarefa'
+    });
+});
+
+// Add Submit POST Route
+app.post('/tarefas/add', function(req, res){
+    let tarefa = new Tarefa();
+    tarefa.nome = req.body.nome;
+    tarefa.estadoDaTarefa = req.body.estadoDaTarefa = "Pendente";
+    tarefa.descricaoDetalhada=req.body.descricaoDetalhada;
+    tarefa.importancia=req.body.importancia;
+    tarefa.urgencia=req.body.urgencia;
+    tarefa.prioridade=req.body.prioridade;
+    tarefa.tempoMinimo=req.body.tempoMinimo;
+    tarefa.tempoUtilizado=req.body.tempoUtilizado;
+    tarefa.categoria=req.body.categoria;
+    tarefa.subcategoria=req.body.subcategoria;
+
+    tarefa.save(function(err){
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            res.redirect('/');
+        }
+    });
+});
+
+//Start Server
+app.listen(3000, function(){
+    console.log('Servidor iniciou na porta 3000...');
+})
+
+    /*let Estados = {
         P: "Pendente",
         C: "Concluída"
         };
@@ -24,13 +101,13 @@ app.get('/', function(request, response){
     }
     let prioridade = function (importante, urgente){
         if(importante == Importancia.I && urgente == Urgencia.U){
-            return 1;//tarefas que devem ser feitas imediatamente
+            return 1;//Crítica - tarefas que devem ser feitas imediatamente
         }else if(importante == Importancia.I && urgente == Urgencia.N){
-            return 2;//tarefas que você vai marcar para fazer depois
+            return 2;//Alta - tarefas que você vai marcar para fazer depois
         }else if(importante == Importancia.N && urgente == Urgencia.U){
-            return 3;//tarefas que você vai delegar para outras pessoas ou pode fazer quando as que têm prioridade 1 e 2 forem concluídas
+            return 3;//Média - tarefas que você vai delegar para outras pessoas ou pode fazer quando as que têm prioridade 1 e 2 forem concluídas
         }else
-            return 4;//tarefas que você vai riscar da sua lista ou pode considerar como projetos a fazer no tempo livre
+            return 4;//Baixa - tarefas que você vai riscar da sua lista ou pode considerar como projetos a fazer no tempo livre
     };
     let categoria = {
         T: "Tarefa",
@@ -43,7 +120,9 @@ app.get('/', function(request, response){
             nome:"Estender a roupa",
             estadoDaTarefa: Estados.P,
             descricaoDetalhada:"Estender a roupa na cozinha",
-            prioridade: prioridade(Importancia.I,Urgencia.U),
+            urgente: Urgencia.U,
+            importante: Importancia.I,
+            prioridade: prioridade(importante,urgente),
             tempoMinimo: 10,
             tempoUtilizado: 0,
             categoria: categoria.T,
@@ -54,27 +133,13 @@ app.get('/', function(request, response){
             nome:"Ir comprar carne",
             estadoDaTarefa: Estados.P,
             descricaoDetalhada:"Ir ao talho X buscar a carne que foi encomendada de manhã. Não esquecer do dinheiro.",
-            prioridade: prioridade(Importancia.I,Urgencia.N),
+            urgente: Urgencia.N,
+            importante: Importancia.I,
+            prioridade: prioridade(importante,urgente),
             tempoMinimo: 30,
             tempoUtilizado: 0,
             categoria: categoria.T,
             subcategoria: null
         }
     ];
-    response.render('index',{
-        titulo: 'Lista de tarefas',
-        tarefas: tarefas
-    });
-});
-
-// Add Route
-app.get('/tarefas/add', function(req, res){
-    res.render('add_todo',{
-        titulo:'Adicionar tarefa'
-    });
-});
-
-//Start Server
-app.listen(3000, function(){
-    console.log('Servidor iniciou na porta 3000...');
-})
+    */

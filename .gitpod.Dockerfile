@@ -9,6 +9,11 @@ RUN sudo apt-get update \
  && sudo rm -rf /var/lib/apt/lists/*
 RUN sudo mkdir -p /data/db \
  && sudo chown gitpod:gitpod -R /data/db
+RUN npm install -g nodemon
+RUN npm install --save mongoose
+RUN npm install --save pug
+RUN npm install --save body-parser
+RUN nodemon
  
 #FROM gitpod/workspace-mysql
                     

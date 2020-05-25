@@ -33,6 +33,9 @@ let Prioridade = require('./models/prioridade');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// Set Public Folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Body parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -48,6 +51,15 @@ app.get('/', function(request, response){
             tarefas: tarefas
         });
         }
+    });
+});
+
+//Get Single To-do list Route
+app.get('/tarefas/:id', function (req, res){
+    Tarefa.findById(req.params.id, function(err, tarefa){
+        res.render('tarefa', {
+            tarefa:tarefa
+        });
     });
 });
 

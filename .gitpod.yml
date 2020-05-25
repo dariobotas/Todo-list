@@ -4,6 +4,7 @@ tasks:
   - command: npm install --save mongoose
   - command: npm install --save pug
   - command: npm install --save body-parser
+  - command: npm install -g bower
   - command: mkdir -p /workspace/data && mongod --dbpath /workspace/data
 image:
   file: .gitpod.Dockerfile

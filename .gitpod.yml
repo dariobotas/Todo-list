@@ -1,9 +1,9 @@
 tasks:
   - init: echo "Replace me with a build script for the project."
-    command: npm install -g nodemon
-    command: npm install --save mongoose
-    command: npm install --save pug
-    command: npm install --save body-parser
-    command: mkdir -p /workspace/data && mongod --dbpath /workspace/data
+  - command: npm install -g nodemon
+  - command: npm install --save mongoose
+  - command: npm install --save pug
+  - command: npm install --save body-parser
+  - command: mkdir -p /workspace/data && mongod --dbpath /workspace/data
 image:
   file: .gitpod.Dockerfile

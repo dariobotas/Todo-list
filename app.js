@@ -48,7 +48,9 @@ app.get('/', function(request, response){
         }else{
             response.render('index',{
             tituloAdicionar: 'Adicionar tarefa',
-            tituloLista: 'Lista de tarefas',
+            tituloLista: 'Tarefas Pendentes',
+            tituloConcluidas: 'Tarefas concluídas',
+            ideiasProjetos: 'Ideias/Projetos',
             tarefas: tarefas
         });
         }

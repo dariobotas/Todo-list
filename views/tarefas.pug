@@ -1,0 +1,9 @@
+extends index
+
+block content
+    block listar-tarefas
+        h1 #{tituloLista}
+        ul.list-group
+            each tarefa, i in tarefas
+                li.list-group-item
+                    a(href='/tarefas/'+tarefa._id)= tarefa.nome

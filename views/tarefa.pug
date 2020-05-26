@@ -1,13 +1,16 @@
 extends layout
 
 block content
-    h1= nome
-    p= estadoDaTarefa
-    p= descricaoDetalhada
-    p= importancia
-    p= urgencia
-    p= prioridade
-    p= tempoMinimo
-    p= tempoUtilizado
-    p= categoria
-    p= subcategoria
+    h1= tarefa.nome
+    p= tarefa.estadoDaTarefa
+    p= tarefa.descricaoDetalhada
+    p= tarefa.importancia
+    p= tarefa.urgencia
+    p= tarefa.prioridade
+    p= tarefa.tempoMinimo
+    p= tarefa.tempoUtilizado
+    p= tarefa.categoria
+    p= tarefa.subcategoria
+
+    p
+        a(href='/') Voltar  

@@ -47,19 +47,11 @@ app.get('/', function(request, response){
             console.log(err);
         }else{
             response.render('index',{
-            titulo: 'Lista de tarefas',
+            tituloAdicionar: 'Adicionar tarefa',
+            tituloLista: 'Lista de tarefas',
             tarefas: tarefas
         });
         }
-    });
-});
-
-//Get Single To-do list Route
-app.get('/tarefas/:id', function (req, res){
-    Tarefa.findById(req.params.id, function(err, tarefa){
-        res.render('tarefa', {
-            tarefa:tarefa
-        });
     });
 });
 
@@ -94,10 +86,19 @@ app.post('/tarefas/add', function(req, res){
     });
 });
 
+//Get Single To-do list Route
+app.get('/tarefas/:id', function (req, res){
+    Tarefa.findById(req.params.id, function(err, tarefa){
+        res.render('tarefa', {
+            tarefa:tarefa
+        });
+    });
+});
+
 //Start Server
 app.listen(3000, function(){
     console.log('Servidor iniciou na porta 3000...');
-})
+});
 
     /*let Estados = {
         P: "Pendente",

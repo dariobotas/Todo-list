@@ -1,9 +1,10 @@
 extends layout
 
 block content
-    h1 #{titulo}
-    form(method='POST', action='/tarefas/add')
-        #form-group
-            label Tarefa:
-            input.form-control(name='nome', type='text')
-        input.btn.btn-primary(type='submit',value='Submit')
+    block adicionar
+        h1 #{titulo}
+        form(method='POST', action='/tarefas/add')
+            #form-group
+                label Tarefa:
+                input.form-control(name='nome', type='text')
+            input.btn.btn-primary(type='submit',value='Submit')

@@ -1,8 +1,16 @@
 extends layout
 
 block content
-    h1 #{titulo}
-    ul.list-group
-        each tarefa, i in tarefas
-            li.list-group-item
-                a(href='/tarefas/'+tarefa._id)= tarefa.nome
+    div
+        h1 #{tituloAdicionar}
+        form(method='POST', action='/tarefas/add')
+            #form-group
+                label Tarefa:
+                input.form-control(name='nome', type='text')
+            input.btn.btn-primary(type='submit',value='Submit')
+    div    
+        h1 #{tituloLista}
+        ul.list-group
+            each tarefa, i in tarefas
+                li.list-group-item
+                    a(href='/tarefas/'+tarefa._id)= tarefa.nome

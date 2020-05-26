@@ -3,10 +3,13 @@ html
     head
         title To-do List
         link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+        script(src='/bower_components/jquery/dist/jquery.js')        
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')        
     body
-        block content
-        br
-        hr
-        footer
-            p Copyright &copy; #{new Date().getFullYear()}
-    script(src='/bower_components/bootstrap/dist/js/bootstrap.js')        
+        .container-fluid
+            block content
+            br
+            hr
+            footer
+                p Copyright &copy; #{new Date().getFullYear()}
+    

@@ -7,6 +7,7 @@ let Estado = require('../models/estados');
 let Importancia = require('../models/importancia');
 let Urgencia = require('../models/urgencia');
 let Prioridade = require('../models/prioridade');
+let Categoria = require('../models/categoria');
 
 // Add Route
 router.route('/')
@@ -26,7 +27,7 @@ router.route('/')
     tarefa.prioridade=Prioridade(tarefa.importancia, tarefa.urgencia);
     tarefa.tempoMinimo=req.body.tempoMinimo ? req.body.tempoMinimo : 30;
     tarefa.tempoUtilizado=req.body.tempoUtilizado ? req.body.tempoUtilizado : 0;
-    tarefa.categoria=req.body.categoria ? req.body.categoria : "Tarefa";
+    tarefa.categoria=req.body.categoria ? req.body.categoria : Categoria.T;
     tarefa.subcategoria=req.body.subcategoria ? req.body.subcategoria : "";
 
     tarefa.save(function(err){

@@ -53,7 +53,7 @@ app.get('/', function(request, response){
     });
 });
 
-let tarefas = require('./routes/tarefas');
+let tarefas = require('./routers/tarefas');
 app.use('/tarefas', tarefas);
 
 //Start Server

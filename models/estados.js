@@ -1,4 +1,4 @@
-let mongoose = require("mongoose");
+/*let mongoose = require("mongoose");
 
 // Estados Schema
 let estadoSchema = mongoose.Schema({
@@ -12,4 +12,9 @@ let estadoSchema = mongoose.Schema({
     }
 });
 
-let Estado = module.exports = mongoose.model('Estados', estadoSchema);
+let Estado = module.exports = mongoose.model('Estados', estadoSchema);*/
+
+let Estado = module.exports = {
+    P: "Pendente",
+    C: "Concluída"
+    };

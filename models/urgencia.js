@@ -1,4 +1,4 @@
-let mongoose = require("mongoose");
+/*let mongoose = require("mongoose");
 
 // Urgência Schema
 let urgenciaSchema = mongoose.Schema({
@@ -12,4 +12,8 @@ let urgenciaSchema = mongoose.Schema({
     }
 });
 
-let Urgencia = module.exports = mongoose.model('Urgencia', urgenciaSchema);
+let Urgencia = module.exports = mongoose.model('Urgencia', urgenciaSchema);*/
+let Urgencia = module.exports= {
+    U: "Urgente",
+    N: "Não é urgente"
+};

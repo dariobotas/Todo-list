@@ -9,25 +9,25 @@ let Urgencia = require('../models/urgencia');
 let Prioridade = require('../models/prioridade');
 
 // Add Route
-router.get('/tarefas/add', function(req, res){
-    res.render('add_todo',{
+router.route('/')
+.get((req, res) => {
+    res.render('index',{
         titulo:'Adicionar tarefa'
     });
-});
-
+})
 // Add Submit POST Route
-router.post('/tarefas/add', function(req, res){
+.post((req, res) => {
     let tarefa = new Tarefa();
     tarefa.nome = req.body.nome;
-    tarefa.estadoDaTarefa = req.body.estadoDaTarefa = "Pendente";
-    tarefa.descricaoDetalhada=req.body.descricaoDetalhada;
-    tarefa.importancia=req.body.importancia;
-    tarefa.urgencia=req.body.urgencia;
-    tarefa.prioridade=req.body.prioridade;
-    tarefa.tempoMinimo=req.body.tempoMinimo;
-    tarefa.tempoUtilizado=req.body.tempoUtilizado;
-    tarefa.categoria=req.body.categoria;
-    tarefa.subcategoria=req.body.subcategoria;
+    tarefa.estadoDaTarefa = req.body.estadoDaTarefa ? req.body.estadoDaTarefa : Estado.P;
+    tarefa.descricaoDetalhada=req.body.descricaoDetalhada ? req.body.descricaoDetalhada : "";
+    tarefa.importancia=req.body.importancia ? req.body.importancia : Importancia.N;
+    tarefa.urgencia=req.body.urgencia ? req.body.urgencia : Urgencia.N;
+    tarefa.prioridade=Prioridade(tarefa.importancia, tarefa.urgencia);
+    tarefa.tempoMinimo=req.body.tempoMinimo ? req.body.tempoMinimo : 30;
+    tarefa.tempoUtilizado=req.body.tempoUtilizado ? req.body.tempoUtilizado : 0;
+    tarefa.categoria=req.body.categoria ? req.body.categoria : "Tarefa";
+    tarefa.subcategoria=req.body.subcategoria ? req.body.subcategoria : "";
 
     tarefa.save(function(err){
         if(err){
@@ -37,7 +37,7 @@ router.post('/tarefas/add', function(req, res){
             res.redirect('/');
         }
     });
-});
+})
 
 //Get Single To-do list Route
 router.get('/tarefas/:id', function (req, res){
@@ -48,6 +48,6 @@ router.get('/tarefas/:id', function (req, res){
     });
 });
 
-//router.post();
+//.post();
 
 module.exports = router;

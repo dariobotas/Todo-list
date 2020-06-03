@@ -1,4 +1,4 @@
-let mongoose = require("mongoose");
+/*let mongoose = require("mongoose");
 
 // Importância Schema
 let importanciaSchema = mongoose.Schema({
@@ -12,4 +12,8 @@ let importanciaSchema = mongoose.Schema({
     }
 });
 
-let Importancia = module.exports = mongoose.model('Importancia', importanciaSchema);
+let Importancia = module.exports = mongoose.model('Importancia', importanciaSchema);*/
+let Importancia = module.exports= {
+    I: "Importante",
+    N: "Não é importante"
+};

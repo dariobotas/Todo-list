@@ -4,7 +4,7 @@ block content
     .container-fluid
         //block adicionar-tarefa
         h1.display-4(style='text-align:center') #{tituloAdicionar}
-        form(method='POST', action='/tarefas/add')
+        form(method='POST', action='/tarefas')
             #form-group
                 div.input-group.mb-3.col-sm
                     input.form-control(name='nome', type='text', placeholder='Insira tarefa e clique "Enter" ou no botão "Adicionar"', aria-label='Insira tarefa')
@@ -27,7 +27,7 @@ block content
                                         p= "Descrição detalhada: "+tarefa.descricaoDetalhada
                                         p= "Urgência: "+tarefa.urgencia
                                         p= "Importância: "+tarefa.importancia
-                                        //p= "Prioridade: "+tarefa.getPrioridade()
+                                        p= "Prioridade: "+tarefa.prioridade
                                         p= "Tempo Mínimo: "+tarefa.tempoMinimo
                                         p= "Tempo Utilizado: "+tarefa.tempoUtilizado
                                         p= "Categoria: "+tarefa.categoria

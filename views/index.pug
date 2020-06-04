@@ -14,13 +14,15 @@ block content
         //block listar-tarefas
         .row
             .col-xl.col-lg.col-md.col-sm
-                h3 #{tituloLista}
+                //h3 #{tituloLista}
                 .container.theme-showcase(role='main')
                     .panel-group#accordion(role='tablist' aria-multiselectable='true')
                         each tarefa, i in tarefas
                             .panel.panel-default.card
                                 .panel-heading.card-header(role='tab' id="heading"+tarefa._id)
                                     a.panel-title.card-link(role='button' data-toggle='collapse' data-parent='#accordion' href="#collapse"+tarefa._id aria-expanded='false' aria-controls='collapse'+tarefa._id)= tarefa.nome
+                                    a.close.delete-task(id=tarefa._id href='#' type='submit' aria-label='Close' data-id=tarefa._id) &times;
+                                        //span(aria-hidden='true') 
                                 div(id='collapse'+tarefa._id class="panel-collapse collapse" role='tabpanel' aria-labelledby='heading'+tarefa._id)
                                     .panel-body.card-body 
                                         p= "Estado: "+tarefa.estadoDaTarefa
@@ -33,7 +35,7 @@ block content
                                         p= "Categoria: "+tarefa.categoria
                                         p= "Sub-Categoria: "+tarefa.subcategoria
                             p
-            .col-xl.col-lg.col-md.col-sm
+            //.col-xl.col-lg.col-md.col-sm
                 h3 #{tituloConcluidas}
-            .col-xl.col-lg.col-md.col-sm
+            //.col-xl.col-lg.col-md.col-sm
                 h3 #{ideiasProjetos}

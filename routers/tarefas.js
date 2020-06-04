@@ -38,10 +38,25 @@ router.route('/')
             res.redirect('/');
         }
     });
-})
+});
+
+//delete task
+router.delete('/:id', (req, res) => {
+    let tarefa;
+    let query = {_id:req.params.id}
+
+    Tarefa.findById(req.params.id, (err, tarefa) => {
+        Tarefa.remove(query, function(err) {
+            if(err){
+                console.log(err);
+            }
+            res.send('Success');
+        });
+    });
+});
 
 //Get Single To-do list Route
-router.get('/tarefas/:id', function (req, res){
+router.get('/add/:id', function (req, res){
     Tarefa.findById(req.params.id, function(err, tarefa){
         res.render('tarefa', {
             tarefa:tarefa
